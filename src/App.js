@@ -16,18 +16,10 @@ function App() {
     console.log('t4t')
 
     ref2.current.addEventListener('load', e => {
-      console.log('h1')
-      let dir = []
-      let r1 = []
-      let g1 = []
-      let b1 = []
-
-      for (let i = 0; i < 100; i++) {
-        r1.push(Math.random() * 100)
-        g1.push(Math.random() * 10)
-        b1.push(Math.random() * 100)
-        dir.push(4)
-      }
+      let r = Math.random() * 100
+      let g = Math.random() * 10
+      let b = Math.random() * 100
+      let dir = 4
 
       const xs = []
       const ys = []
@@ -35,44 +27,17 @@ function App() {
         xs.push(Math.random() * width)
         ys.push(Math.random() * height)
       }
-      let k = 0
 
       function fill() {
-        let p = 1
-        let c = `rgb(0,0,0)`
-        for (let i = 0; i < 10; i++) {
-          let grd1
-          if (k > 4) {
-            grd1 = ctx.createLinearGradient(0, 0, width, 0)
-          } else if (k > 3) {
-            grd1 = ctx.createLinearGradient(0, 0, width, height)
-          } else if (k > 2) {
-            grd1 = ctx.createLinearGradient(0, 0, width, height / 2)
-          } else if (k > 1) {
-            grd1 = ctx.createLinearGradient(0, 0, width / 2, height / 2)
-          } else {
-            grd1 = ctx.createLinearGradient(0, 0, 0, height)
-          }
-          const r = r1[i]
-          const g = g1[i]
-          const b = b1[i]
-          grd1.addColorStop(0, c)
-          c = `rgb(${r},${g},${b})`
-
-          grd1.addColorStop(1, c)
-          ctx.fillStyle = grd1
-          ctx.fillRect(
-            width * (1 - p) * Math.random(),
-            height * (1 - p),
-            width - width * (1 - p) * 2,
-            height - height * (1 - p) * 2,
-          )
-          p -= 0.01
-          if (b1[i] < 20 || b1[i] > 150) dir[i] *= -1
-          b1[i] += dir[i] * Math.random()
-          g1[i] += dir[i] * Math.random()
-          r1[i] += dir[i] * Math.random()
-        }
+        const grd1 = ctx.createLinearGradient(0, 0, 0, height)
+        grd1.addColorStop(0, `rgb(0,0,0)`)
+        grd1.addColorStop(1, `rgb(${r},${g},${b})`)
+        ctx.fillStyle = grd1
+        ctx.fillRect(0, 0, width, height)
+        if (b < 20 || b > 150) dir *= -1
+        b += dir * Math.random()
+        g += dir * Math.random()
+        r += dir * Math.random()
 
         ctx.fillStyle = 'yellow'
         for (let i = 0; i < 100; i++) {
