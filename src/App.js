@@ -8,10 +8,16 @@ function App() {
   useEffect(() => {
     const canvas = ref.current
     const image = ref2.current
-    let { width, height } = canvas.getBoundingClientRect()
-    canvas.width = width
-    canvas.height = height
+    const width = window.innerWidth
+    const height = window.innerHeight
+    const dpi = window.devicePixelRatio
+    canvas.width = width * dpi
+    canvas.height = height * dpi
+    canvas.style.width = width + 'px'
+    canvas.style.height = height + 'px'
+
     const ctx = canvas.getContext('2d')
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
     ctx.clearRect(0, 0, width, height)
 
     ref2.current.addEventListener('load', e => {
@@ -51,9 +57,10 @@ function App() {
       fill()
     })
   }, [])
+
   return (
     <div style={{ position: 'relative' }}>
-      <canvas ref={ref} style={{ margin: 0, width: '100%', height: '100%' }} />
+      <canvas ref={ref} />
       <div style={{ display: 'none' }}>
         <img ref={ref2} id="source" src="moon2.png" alt="moon" />
       </div>
@@ -65,7 +72,10 @@ function App() {
           top: 0,
         }}
       >
-        <source src="211112_00.mp3" type="audio/mpeg" />
+        <source
+          src="https://s3.us-east-2.amazonaws.com/myloveydove.com/220201_00.mp3"
+          type="audio/mpeg"
+        />
       </audio>
     </div>
   )
