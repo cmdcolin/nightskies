@@ -7,13 +7,12 @@ function App() {
 
   useEffect(() => {
     const canvas = ref.current
+    const image = ref2.current
     let { width, height } = canvas.getBoundingClientRect()
     canvas.width = width
     canvas.height = height
     const ctx = canvas.getContext('2d')
     ctx.clearRect(0, 0, width, height)
-    const image = ref2.current
-    console.log('t4t')
 
     ref2.current.addEventListener('load', e => {
       let r = Math.random() * 100
@@ -53,15 +52,22 @@ function App() {
     })
   }, [])
   return (
-    <>
-      <canvas
-        ref={ref}
-        style={{ margin: 0, width: '100vw', height: '100vh', display: 'block' }}
-      />
+    <div style={{ position: 'relative' }}>
+      <canvas ref={ref} style={{ margin: 0, width: '100%', height: '100%' }} />
       <div style={{ display: 'none' }}>
         <img ref={ref2} id="source" src="moon2.png" alt="moon" />
       </div>
-    </>
+      <audio
+        controls
+        style={{
+          position: 'absolute',
+          right: 0,
+          top: 0,
+        }}
+      >
+        <source src="211112_00.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
   )
 }
 
