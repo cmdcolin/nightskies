@@ -20,7 +20,7 @@ function App() {
     ctx.scale(window.devicePixelRatio, window.devicePixelRatio)
     ctx.clearRect(0, 0, width, height)
 
-    ref2.current.addEventListener('load', e => {
+    ref2.current.addEventListener('load', () => {
       let r = Math.random() * 100
       let g = Math.random() * 10
       let b = Math.random() * 100
@@ -73,7 +73,7 @@ function App() {
         }}
       >
         <source
-          src="https://s3.us-east-2.amazonaws.com/myloveydove.com/220201_00.mp3"
+          src="https://s3.us-east-2.amazonaws.com/radioshow-s3uploadbucket-hkjnp01vb17m/nightskies.mp3"
           type="audio/mpeg"
         />
       </audio>
